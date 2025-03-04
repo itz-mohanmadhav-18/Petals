@@ -1,13 +1,11 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-import tailwindcss from '@tailwindcss/vite' // Assuming this exists in v4+
+// vite.config.js
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
-  base: '/#/',
-  plugins: [
-    react(),
-    tailwindcss() // Using the official plugin
-  ],
+  base: '/petals/', // Replace with your GitHub repo name
+  plugins: [react(), tailwindcss()],
   build: {
     rollupOptions: {
       input: {
