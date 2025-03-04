@@ -9,7 +9,7 @@ const userProfile = {
   avatar: 'https://randomuser.me/api/portraits/men/32.jpg'
 };
 
-const Header = ({ onSidebarToggle, isSidebarOpen }) => {
+const Header = ({ onSidebarToggle }) => {
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
   const [isNotificationOpen, setIsNotificationOpen] = useState(false);
   const [notifications, setNotifications] = useState([
