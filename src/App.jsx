@@ -5,8 +5,8 @@ import Layout from "./Layout";
 import LandingPage from "./components/LandingPage";
 import ProtectedRoute from "./components/ProtectedRoutes";
 import { Navigate } from "react-router-dom";
-import AddStudent from "./components/adminFunctions/AddStudent";
-import AddClass from "./components/adminFunctions/AddClass"; // Import AddClass component
+import AddStudent from "./components/adminFunctions/AddStudent.jsx";
+import AddClass from "./components/adminFunctions/addClass.jsx"; // Import AddClass component
 
 const routes = createBrowserRouter(
   createRoutesFromElements(
