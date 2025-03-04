@@ -6,23 +6,26 @@ import client from "./apollo-client.js";
 import { ApolloProvider } from "@apollo/client";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { AuthProvider } from "./context/AuthContext";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <ApolloProvider client={client}>
-      <ToastContainer
-        position="top-right" // Position of toast notifications
-        autoClose={5000} // Close after 5 seconds
-        hideProgressBar={false} // Show progress bar
-        newestOnTop={false} // Show newest toasts on top
-        closeOnClick // Close on click
-        rtl={false} // Left-to-right layout
-        pauseOnFocusLoss // Pause when window loses focus
-        draggable // Allow dragging to dismiss
-        pauseOnHover // Pause on hover
-        theme="dark" // Change to dark theme
-      />
-      <App />
+      <AuthProvider>
+        <ToastContainer
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="dark"
+        />
+        <App />
+      </AuthProvider>
     </ApolloProvider>
   </StrictMode>
 );

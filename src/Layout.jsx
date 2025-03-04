@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Outlet } from 'react-router-dom'; // Import Outlet from react-router-dom
+import { Outlet } from 'react-router-dom';
 import Header from './components/Layout/Header';
 import Sidebar from './components/Layout/sidebar';
 import Footer from './components/Layout/Footer';
@@ -16,7 +16,7 @@ const Layout = () => {
           <Outlet /> {/* Render nested routes here */}
         </main>
       </div>
-      <Footer />
+      <Footer isSidebarOpen={isSidebarOpen} />
     </div>
   );
 };

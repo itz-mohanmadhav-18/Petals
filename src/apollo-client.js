@@ -1,38 +1,77 @@
-import { ApolloClient, InMemoryCache, HttpLink } from '@apollo/client';
+import { ApolloClient, InMemoryCache, HttpLink, ApolloLink, concat } from '@apollo/client';
 import { onError } from '@apollo/client/link/error';
-import { toast } from 'react-toastify'; // Import toast for notifications
+import { toast } from 'react-toastify';
 
-const errorLink = onError(({ graphQLErrors, networkError }) => {
-    if (graphQLErrors) {
-      graphQLErrors.forEach(({ message, extensions }) => {
-        console.error(`GraphQL error: ${message}`);
-        if (extensions?.code === 'UNAUTHENTICATED') {
-          toast.error('Please log in again.');
-        } else {
-          toast.error(`Error: ${message}`);
-        }
-      });
-    }
-    if (networkError) {
-      console.error(`Network error: ${networkError.message}`);
-      toast.error('Network error. Please check your connection.');
-    }
-  });
+// Function to handle logout
+const logout = () => {
+  localStorage.removeItem('token');
+  localStorage.removeItem('user');
+  
+  // Redirect to login page
+  window.location.href = '/login';
+};
 
-// Create a link to connect to your GraphQL server
-const httpLink = new HttpLink({
-  uri: 'http://localhost:4000', // Your GraphQL server URL (change this to your actual URL)
+// Auth middleware - adds token to requests
+const authMiddleware = new ApolloLink((operation, forward) => {
+  const token = localStorage.getItem('token');
+  
+  operation.setContext(({ headers = {} }) => ({
+    headers: {
+      ...headers,
+      authorization: token ? token : '', // Just the token without "Bearer" prefix
+    }
+  }));
+
+  return forward(operation);
 });
 
-// Create a cache to store GraphQL data
-const cache = new InMemoryCache();
+// Error handling link
+const errorLink = onError(({ graphQLErrors, networkError, operation, forward }) => {
+  if (graphQLErrors) {
+    for (const err of graphQLErrors) {
+      console.error(`GraphQL error: ${err.message}`);
+      
+      // Handle authentication errors
+      if (err.extensions?.code === 'UNAUTHENTICATED') {
+        toast.error('Your session has expired. Please log in again.');
+        logout();
+      } else {
+        // Display other GraphQL errors
+        toast.error(`Error: ${err.message}`);
+      }
+    }
+  }
+  
+  if (networkError) {
+    console.error(`Network error: ${networkError.message}`);
+    toast.error('Network error. Please check your connection.');
+  }
+});
 
-// Create the Apollo Client
+// HTTP link to your GraphQL server
+const httpLink = new HttpLink({
+  uri: 'http://localhost:4000/graphql', // Your GraphQL server URL
+});
+
+// Combine all links
+const link = errorLink.concat(authMiddleware.concat(httpLink));
+
+// Create Apollo Client
 const client = new ApolloClient({
-  link: errorLink.concat(httpLink), // Combine error handling with HTTP link
-  cache, // Use the cache to store data
-  headers: {
-    authorization: localStorage.getItem('token') || '', // Include the token in the headers
+  link,
+  cache: new InMemoryCache(),
+  defaultOptions: {
+    watchQuery: {
+      fetchPolicy: 'network-only', // Don't use cache for queries by default
+      errorPolicy: 'all',
+    },
+    query: {
+      fetchPolicy: 'network-only',
+      errorPolicy: 'all',
+    },
+    mutate: {
+      errorPolicy: 'all',
+    },
   },
 });
 
