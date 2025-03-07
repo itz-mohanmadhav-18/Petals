@@ -5,7 +5,7 @@ import Layout from "./Layout";
 import LandingPage from "./components/LandingPage";
 import ProtectedRoute from "./components/ProtectedRoutes";
 import { Navigate } from "react-router-dom";
-import AddStudent from "./components/adminFunctions/AddStudent.jsx";
+// import AddStudent from "./components/adminFunctions/AddStudent.jsx";
 import AddClass from "./components/adminFunctions/AddClass.jsx";
 
 const routes = createBrowserRouter(
@@ -22,7 +22,7 @@ const routes = createBrowserRouter(
           <Route path="admin" element={<AdminDashboard />} />
           
           {/* Student management routes */}
-          <Route path="admin/students/create" element={<AddStudent />} />
+          {/* <Route path="admin/students/create" element={<AddStudent />} /> */}
           <Route path="admin/students/list" element={<div>Student List (placeholder)</div>} />
           
           {/* Class management routes */}
