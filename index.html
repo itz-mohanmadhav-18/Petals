@@ -11,37 +11,3 @@
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
-```
-
-4. Steps to rebuild and serve:
-
-```sh
-# Clean the dist folder
-rm -rf dist
-
-# Rebuild the project
-npm run build
-
-# Serve the built files locally
-npm run preview
-```
-
-These changes will:
-- Fix MIME type issues for CSS and JS files
-- Fix 404 errors for assets
-- Properly handle static file serving
-- Configure correct base path for assets
-
-After making these changes, the build should work correctly without MIME type or 404 errors.<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="./vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Petals @ Prakriti</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
-</html>
