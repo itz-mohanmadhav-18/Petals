@@ -5,7 +5,7 @@ import Layout from "./Layout";
 import LandingPage from "./components/LandingPage";
 import ProtectedRoute from "./components/ProtectedRoutes";
 import { Navigate } from "react-router-dom";
-import AddStudent from "./components/adminFunctions/addStudent.jsx";
+import AddStudent from "./components/adminFunctions/addStudent.jsx"; 
 import AddClass from "./components/adminFunctions/AddClass.jsx";
 
 const routes = createBrowserRouter(
