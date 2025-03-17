@@ -50,7 +50,7 @@ const errorLink = onError(({ graphQLErrors, networkError, operation, forward }) 
 
 // HTTP link to your GraphQL server
 const httpLink = new HttpLink({
-  uri: 'http://localhost:4000/graphql', // Your GraphQL server URL
+  uri: 'https://vidhyalya-backend.onrender.com/', // Your GraphQL server URL
 });
 
 // Combine all links
