@@ -1,0 +1,138 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Permanent+Marker&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*{
+    font-family: monospace;
+    overflow-x: hidden;
+}
+
+html, body {
+  scroll-behavior: smooth; /* Optional, for smoother scrolling */
+}
+
+
+.hidden-scrollbar {
+  -ms-overflow-style: none; /* Internet Explorer and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.hidden-scrollbar::-webkit-scrollbar {
+  display: none; /* WebKit browsers (Chrome, Safari, etc.) */
+}
+
+.headings {
+    width: 100%;
+    text-align: center;
+    font-size: 3rem;
+    font-family: 'Times New Roman', Times, serif;
+    color: rgba(0, 0, 0, 0.082);
+    margin: 16px 0;
+    background-size: 0% 100%;
+    background-repeat: no-repeat;
+    background-clip: text;
+    -webkit-background-clip: text;
+    transition: background-size linear forwards;
+    position: relative;
+    overflow:hidden;
+}
+.headings::after, .headings::before{
+    content: " ";
+    display: block;
+    border-bottom: 2px solid #ccc;
+    background-color:#f8f8f8;
+    position: absolute;
+    top:50%;
+    width: 30%;
+}
+.headings::after{
+    right: 0;
+}
+.headngs::before{
+    left: 0;
+}
+@media (max-width: 950px) {
+  .headings::after{
+    width: 100%;
+    position: relative;
+    border-bottom: 0.5px solid #ccc;
+  }
+  .headings::before {
+      display: none;
+  }
+}
+.animate-on-scroll {
+    transform: translateY(100px) scale(0.4);
+    opacity: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+  
+.animate-on-scroll.in-view {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+}
+
+.gallery {
+    --s: 150px; 
+    --g: 10px;  
+    --f: 1.5;   
+    display: grid;
+    gap: var(--g);
+    width: calc(3*var(--s) + 2*var(--g));
+    aspect-ratio: 1;
+    grid-template-columns: repeat(3,auto);
+    margin: 30px 10px;
+  }
+  
+  .gallery > img {
+    width: 0;
+    height: 0;
+    min-height: 100%;
+    min-width: 100%;
+    object-fit: cover;
+    cursor: pointer;
+    filter: grayscale(80%);
+    transition: .35s linear;
+  }
+  
+  .gallery img:hover{
+    filter: grayscale(0);
+    width:  calc(var(--s)*var(--f));
+    height: calc(var(--s)*var(--f));
+  }
+
+  .spin-container {
+    position: relative;
+    width: 25%;
+    height: auto;
+    transform-style: preserve-3d;
+    animation: spin 5s linear infinite;
+  }
+  .spin-container img{
+    filter: drop-shadow(10px 10px black);
+  }
+  
+  @keyframes spin {
+    0% {
+      transform: rotateY(0deg);
+      filter:brightness(1);
+    }
+    50% {
+        transform: rotateY(180deg);
+        filter:brightness(0.5);
+    }
+    100% {
+      transform: rotateY(360deg);
+      filter:brightness(1);
+    }
+  }
+  
+  .perspective {
+    perspective: 1000px;
+  }
+  .animate-rotate-x {
+    animation: rotateX 10s linear infinite;
+    transform-style: preserve-3d;
+  }
+  
