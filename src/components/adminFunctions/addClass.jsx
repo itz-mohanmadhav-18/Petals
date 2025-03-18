@@ -19,7 +19,7 @@ function AddClass() {
     className: '',
     classSection: '',
     schoolID: '',
-    classTeacherID: '',
+    classTeacherID: null,
     subjectTeachers: [],
     enrolledStudents: [],
     subjects: []
