@@ -1,5 +1,5 @@
 import React from 'react'
-import Section1 from './landingPage/section1'
+import Section1 from './landingPage/Section1.jsx'
 
 function LandingPage() {
   return (
